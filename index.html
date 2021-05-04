@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tic-Tac-Toe</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+        <style>
+            
+            #main{
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                -webkit-transform: translate(-50%, -50%);
+                -moz-transform: translate(-50%, -50%);
+                -o-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                z-index: 100;
+            }
+        
+        #div1,#div2,#div3,#div4,#div5,#div6,#div7,#div8,#div9{
+            border: 1px solid black;
+            height: 100px;
+            width: 100px;
+            float: left;
+            font-size: 70px;
+            text-align: center;
+            background-color: antiquewhite;
+        }
+
+        #heading{
+            text-align: center;
+            padding-top: 20px;
+            
+        }
+        
+        
+        #div1,#div4,#div7{
+            clear: left;
+        }
+        </style>
+    </head>
+
+    <body>
+        <h3 id="heading" class="display-6" >Welcome to Tic-Tac-Toe</h3>
+        <div id="main" >
+            <div id="div1" onclick="fill(this)"></div> <div id="div2" onclick="fill(this)"></div> <div id="div3" onclick="fill(this)"></div>
+            <div id="div4" onclick="fill(this)"></div> <div id="div5" onclick="fill(this)"></div> <div id="div6" onclick="fill(this)"></div>
+            <div id="div7" onclick="fill(this)"></div> <div id="div8" onclick="fill(this)"></div> <div id="div9" onclick="fill(this)"></div>
+        </div>
+
+        
+        <script>
+
+var count=1;
+function fill(control)
+{
+    if(count<=9)
+    {
+        if(count%2!=0)
+            {
+                document.getElementById(control.id).innerHTML='X';
+            }
+            else
+            {
+                document.getElementById(control.id).innerHTML='O';
+            }
+    count++;
+
+    if(checkWin())
+    {
+        if(count%2!=0)
+        {
+            alert("Congratulations! Player2 wins");
+            reset();
+        }
+        else{
+            alert("Congratulations! Player1 wins");
+            reset();
+        }
+    }
+   
+    
+    }
+    else
+    {
+        alert("Draw!");
+        reset();
+    }
+
+    function reset()
+    {
+        for(var i=1; i<=9; i++){
+            document.getElementById('div'+i).innerHTML="";
+        }
+        count=1;
+    }
+}
+function checkWin()
+{
+    if(checkCondition('div1','div2','div3') || checkCondition('div1','div5','div9') || checkCondition('div1','div4','div7') || checkCondition('div3','div5','div7') || checkCondition('div4','div5','div6') || checkCondition('div7','div8','div9') || checkCondition('div2','div5','div8') || checkCondition('div3','div6','div9'))
+    {
+        return true;
+    }
+}
+
+function checkCondition(div1,div2,div3)
+{
+    if(getData(div1)!="" && getData(div2)!="" && getData(div3)!="" && getData(div1)==getData(div2) && getData(div2)==getData(div3))
+    {
+        return true;
+    }
+}
+function getData(div)
+{
+    return document.getElementById(div).innerHTML;
+}
+        </script>
+    </body>
+</html>
